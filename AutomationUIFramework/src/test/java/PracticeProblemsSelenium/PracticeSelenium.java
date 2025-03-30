@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -15,7 +16,7 @@ import org.testng.annotations.Test;
 import Utilities.BaseClass;
 
 
-public class Dropdowns extends BaseClass{
+public class PracticeSelenium extends BaseClass{
 	
 	@Test
 	public void testDropdowns() {
@@ -29,6 +30,29 @@ public class Dropdowns extends BaseClass{
 			System.out.println(element.getText()); 
 		}
 		
+	}
+	//to get attribute value of an element: .getDomAttribute("<AttributeName>")
+	
+	@Test
+	public void testCheckboxes() {
+		driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
+		int count = driver.findElements(By.cssSelector("[type='checkbox']")).size();
+		System.out.println("Number of checkboxes in Page: "+ count);
+		System.out.println(driver.findElement(By.cssSelector("#ctl00_mainContent_chk_friendsandfamily")).isSelected());
+		driver.findElement(By.cssSelector("#ctl00_mainContent_chk_friendsandfamily")).click();
+		Assert.assertTrue(driver.findElement(By.cssSelector("#ctl00_mainContent_chk_friendsandfamily")).isSelected());
+	}
+	
+	@Test
+	public void testAlerts() {
+		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+		driver.findElement(By.id("name")).sendKeys("Pritam");
+		driver.findElement(By.id("alertbtn")).click();
+		System.out.println(driver.switchTo().alert().getText());
+		driver.switchTo().alert().accept();
+		driver.findElement(By.id("confirmbtn")).click();
+		System.out.println(driver.switchTo().alert().getText());
+		driver.switchTo().alert().dismiss();
 	}
 	
 	@BeforeTest
