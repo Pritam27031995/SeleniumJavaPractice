@@ -1,6 +1,2 @@
-/AccessModifiers.class
-/META-INF/
-/ExceptionHandling.class
-/CustomizedException.class
-/ListInterface.class
-/SetInterface.class
+/MapInterface.class
+/FindDuplicateValues.class
