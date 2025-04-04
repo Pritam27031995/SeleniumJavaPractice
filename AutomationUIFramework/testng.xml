@@ -5,7 +5,7 @@
     <classes>
       <class name="PracticeProblemsSelenium.PracticeSelenium"/>
       	<methods>
-      		<include name ="testActionClass" />
+      		<include name ="testJavascriptexecutor" />
       	</methods>
     </classes>
   </test> <!-- Test -->

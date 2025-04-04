@@ -2,9 +2,12 @@ package PracticeProblemsSelenium;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -69,7 +72,8 @@ public class PracticeSelenium extends BaseClass {
 			driver.findElement(By.id("username")).sendKeys("rahulshettyacademy");
 			driver.findElement(By.id("password")).sendKeys("learning");
 			driver.findElement(By.xpath("(//*[@class='radiotextsty'])[2]")).click();
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='You will be limited to only fewer functionalities of the app. Proceed?']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath("//*[text()='You will be limited to only fewer functionalities of the app. Proceed?']")));
 			driver.findElement(By.xpath("//button[@id='okayBtn']")).click();
 			Select sl = new Select(driver.findElement(By.xpath("//select[@class='form-control']")));
 			sl.selectByValue("consult");
@@ -77,30 +81,73 @@ public class PracticeSelenium extends BaseClass {
 			driver.findElement(By.id("signInBtn")).click();
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//app-card[contains(@class,'col-lg-3')]")));
 			List<WebElement> products = driver.findElements(By.xpath("//app-card[contains(@class,'col-lg-3')]"));
-			for (WebElement e: products) {
+			for (WebElement e : products) {
 				e.findElement(By.tagName("button")).click();
 			}
 			driver.findElement(By.xpath("//*[contains(text(),'Checkout')]")).click();
-		
-		}
-		catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	public void testActionClass() throws InterruptedException {
 		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
 		action = new Actions(driver);
-		//Thread.sleep(5000);
+		// Thread.sleep(5000);
 		action.scrollToElement(driver.findElement(By.xpath("//*[text()='iFrame Example']"))).build().perform();
 		action.moveToElement(driver.findElement(By.id("mousehover"))).build().perform();
-		
+
 		action.scrollToElement(driver.findElement(By.id("autocomplete")))
-		.moveToElement(driver.findElement(By.id("autocomplete"))).click()
-		.keyDown(Keys.SHIFT).sendKeys("INDIA").doubleClick().build().perform();
-		
+				.moveToElement(driver.findElement(By.id("autocomplete"))).click().keyDown(Keys.SHIFT).sendKeys("INDIA")
+				.doubleClick().build().perform();
+
 		action.moveToElement(driver.findElement(By.id("openwindow"))).contextClick().build().perform();
+	}
+
+	@Test
+	public void testWindowHandle() {
+		try {
+			driver.get("https://rahulshettyacademy.com/loginpagePractise/");
+			driver.findElement(By.className("blinkingText")).click();
+			Set<String> Windows = driver.getWindowHandles();
+			Iterator<String> it = Windows.iterator();
+			String parentwindow = it.next();
+			String childwindow = it.next();
+			driver.switchTo().window(childwindow);
+			String passwordString = driver.findElement(By.xpath("//*[@class='im-para red']")).getText();
+			System.out.println(passwordString);
+			String password = passwordString.split(" ")[4];
+			System.out.println(password);
+			driver.switchTo().window(parentwindow);
+			driver.findElement(By.id("password")).sendKeys(password);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	@Test
+	public void testFrames() {
+		driver.get("https://jqueryui.com/droppable/");
+		driver.switchTo().frame(driver.findElement(By.className("demo-frame")));
+		action = new Actions(driver);
+		action.dragAndDrop(driver.findElement(By.id("draggable")), driver.findElement(By.id("droppable"))).build().perform();
+		driver.switchTo().defaultContent();
+	}
+	
+	@Test
+	public void testJavascriptexecutor() {
+		try {
+			driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+			js =  (JavascriptExecutor)driver;
+			js.executeScript("arguments[0].scrollIntoView(true);",driver.findElement(By.id("mousehover")));
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		
 	}
 
 	@BeforeTest
