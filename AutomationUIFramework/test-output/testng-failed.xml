@@ -5,8 +5,8 @@
     <classes>
       <class name="PracticeProblemsSelenium.PracticeSelenium">
         <methods>
+          <include name="testBrokenLinks"/>
           <include name="afterTest"/>
-          <include name="testJavascriptexecutor"/>
           <include name="beforeEachtest"/>
         </methods>
       </class> <!-- PracticeProblemsSelenium.PracticeSelenium -->

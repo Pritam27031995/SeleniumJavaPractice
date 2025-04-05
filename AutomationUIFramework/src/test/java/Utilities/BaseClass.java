@@ -7,6 +7,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.asserts.SoftAssert;
 
 import io.cucumber.java.Scenario;
 
@@ -17,6 +18,7 @@ public class BaseClass {
 	public static Scenario scenario;
 	public static Actions action;
 	public static JavascriptExecutor js;
+	public static SoftAssert softassert;
 	
 	public static void init_before_method(Scenario scenario) {
 		BaseClass.scenario=scenario;

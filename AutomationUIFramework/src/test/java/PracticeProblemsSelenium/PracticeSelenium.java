@@ -1,17 +1,33 @@
 package PracticeProblemsSelenium;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import javax.net.ssl.HttpsURLConnection;
+
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Proxy;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -20,6 +36,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import Utilities.BaseClass;
 
@@ -127,26 +144,87 @@ public class PracticeSelenium extends BaseClass {
 		}
 
 	}
-	
+
 	@Test
 	public void testFrames() {
 		driver.get("https://jqueryui.com/droppable/");
 		driver.switchTo().frame(driver.findElement(By.className("demo-frame")));
 		action = new Actions(driver);
-		action.dragAndDrop(driver.findElement(By.id("draggable")), driver.findElement(By.id("droppable"))).build().perform();
+		action.dragAndDrop(driver.findElement(By.id("draggable")), driver.findElement(By.id("droppable"))).build()
+				.perform();
 		driver.switchTo().defaultContent();
 	}
-	
+
 	@Test
 	public void testJavascriptexecutor() {
 		try {
 			driver.get("https://rahulshettyacademy.com/AutomationPractice/");
-			js =  (JavascriptExecutor)driver;
-			js.executeScript("arguments[0].scrollIntoView(true);",driver.findElement(By.id("mousehover")));
-		}catch(Exception e) {
+			js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.id("mousehover")));
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Test
+	public void testChromeOptions() {
+		ChromeOptions options = new ChromeOptions();
+		options.setAcceptInsecureCerts(true);
+		driver = new ChromeDriver(options);
+		driver.get("https://expired.badssl.com/");
+		System.out.println(driver.getTitle());
+
+		// Add the WebDriver proxy capability.
+
+		Proxy proxy = new Proxy();
+		proxy.setHttpProxy("myhttpproxy:3337");
+		options.setCapability("proxy", proxy);
+
+		// to block pop ups
+		// ChromeOptions options = new ChromeOptions();
+		options.setExperimentalOption("excludeSwitches", Arrays.asList("disable-popup-blocking"));
+		
+		//To set default download directory
+		Map<String, Object> prefs = new HashMap<String, Object>();
+		prefs.put("download.default_directory", "/directory/path");
+		options.setExperimentalOption("prefs", prefs);
+
+	}
+	
+	@Test
+	public void testTakeScreenshot() throws IOException {
+		//Full page screenshot
+		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+		File fs = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		FileUtils.copyFile(fs, new File("D:\\Automation Workspace\\JavaSelenium\\SeleniumJavaPractice\\AutomationUIFramework\\Screenshots\\testScreenshot.png"));
+		
+		//Particular Webelement screenshot
+		
+	}
+	
+	@Test
+	public void testBrokenLinks() throws MalformedURLException, IOException {
+		try {
+			driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+			WebElement footer =driver.findElement(By.xpath("//div[@class=' footer_top_agile_w3ls gffoot footer_style']"));
+			List<WebElement> links = footer.findElements(By.tagName("a"));
+			//System.out.println(links.size());
+			for(WebElement e: links) {
+				//System.out.println(e.getAttribute("href"));
+				HttpURLConnection url = (HttpURLConnection) new URL(e.getAttribute("href")).openConnection();
+				url.setRequestMethod("HEAD");
+				url.connect();
+				//System.out.println(url.getResponseCode());
+				if(url.getResponseCode()>400) {
+					System.out.println("The broken links are "+ e.getAttribute("href"));
+					softassert.assertTrue(false);
+				}
+			}
+			softassert.assertAll();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -159,11 +237,12 @@ public class PracticeSelenium extends BaseClass {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		// Explicit wait
 		wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		softassert = new SoftAssert();
 	}
 
 	@AfterTest
 	public void afterTest() {
-		//driver.quit();
+		 driver.quit();
 	}
 
 }
