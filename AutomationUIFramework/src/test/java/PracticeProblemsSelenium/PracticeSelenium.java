@@ -26,6 +26,7 @@ import org.openqa.selenium.Proxy;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
@@ -226,6 +227,49 @@ public class PracticeSelenium extends BaseClass {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	@Test
+	public void testJavaStreams() {
+		driver.get("https://rahulshettyacademy.com/seleniumPractise/#/offers");
+		//validate that sorting functionality is working properly on the web table
+		driver.findElement(By.xpath("//tr/th[1]")).click();
+		List<WebElement> elements = driver.findElements(By.xpath("//tr/td[1]"));
+		List<String> originalList = elements.stream().map(S-> S.getText()).toList();
+		List<String> SortedList = originalList.stream().sorted().toList();
+		Assert.assertTrue(originalList.equals(SortedList),"The Webtable is not in sorted order");
+		
+		//Get the price of the item passed
+		String item = "Beans";
+		List<String> Prices= elements.stream().filter(s->s.getText().contains(item)).map(s->
+		s.findElement(By.xpath("following-sibling::td[1]")).getText()).toList();
+		System.out.println("Price of item "+item+ " is: "+ Prices);
+		
+		
+	}
+	
+	@Test
+	public void testNewWindowOrTab() {
+		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+		//driver.navigate().to("https://rahulshettyacademy.com/seleniumPractise/#/offers");
+		driver.switchTo().newWindow(WindowType.TAB);
+		driver.get("https://rahulshettyacademy.com/seleniumPractise/#/offers");
+		driver.findElement(By.cssSelector("#search-field")).sendKeys("Rice");
+		driver.close();
+		Set<String> windows = driver.getWindowHandles();
+		Iterator<String> it = windows.iterator();
+		String parentwindow = it.next();
+		System.out.println("Current windowname: "+windows);
+		driver.switchTo().window(parentwindow);
+		driver.findElement(By.id("alertbtn")).click();
+	}
+	
+	@Test
+	public void testElementScreenshot() throws IOException {
+		driver.get("https://rahulshettyacademy.com/seleniumPractise/#/offers");
+		driver.findElement(By.cssSelector("#search-field")).sendKeys("Rice");
+		File screenshot =driver.findElement(By.cssSelector("#search-field")).getScreenshotAs(OutputType.FILE);
+		FileUtils.copyFile(screenshot, new File("D:\\Automation Workspace\\JavaSelenium\\AutomationUIFramework\\Screenshots\\partial.png"));
 	}
 
 	@BeforeTest
