@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
-  <test thread-count="5" name="Test">
+<listeners>
+<listener class-name="Utilities.Listeners"></listener>
+</listeners>
+  <test name="Test" parallel="classes"  thread-count="2">
     <classes>
       <class name="PracticeProblemsSelenium.PracticeSelenium">
-      	<methods>
-      		<include name ="testElementScreenshot" />
-      	</methods>
+      <!--	<methods>
+      		<include name ="testDataProvider" />
+      	</methods>-->
       	</class>
     </classes>
   </test> <!-- Test -->

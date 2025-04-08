@@ -34,8 +34,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -271,8 +274,29 @@ public class PracticeSelenium extends BaseClass {
 		File screenshot =driver.findElement(By.cssSelector("#search-field")).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(screenshot, new File("D:\\Automation Workspace\\JavaSelenium\\AutomationUIFramework\\Screenshots\\partial.png"));
 	}
+	
+	@Test(dataProvider="getData")
+	public void testDataProvider(String Username, String Password) {
+		System.out.println("Username: "+Username);
+		System.out.println("Password: "+ Password);
+		
+	}
+	
+	
+	@DataProvider
+	public Object[][] getData(){
+		Object[][] data = new Object[3][2];
+		data[0][0]="FirstUsername";
+		data[0][1]="FirstPassword";
+		data[1][0]="SecondUsername";
+		data[1][1]="SecondPassword";
+		data[2][0]="ThirdUsername";
+		data[2][1]="ThirdPassword";
+		
+		return data;
+	}
 
-	@BeforeTest
+	@BeforeMethod
 	public void beforeEachtest() {
 		driver = new ChromeDriver();
 		driver.manage().deleteAllCookies();
@@ -284,7 +308,7 @@ public class PracticeSelenium extends BaseClass {
 		softassert = new SoftAssert();
 	}
 
-	@AfterTest
+	@AfterMethod
 	public void afterTest() {
 		 driver.quit();
 	}
