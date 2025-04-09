@@ -46,6 +46,7 @@ import Utilities.BaseClass;
 
 public class PracticeSelenium extends BaseClass {
 
+
 	@Test
 	public void testDropdowns() {
 		driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
@@ -298,6 +299,7 @@ public class PracticeSelenium extends BaseClass {
 
 	@BeforeMethod
 	public void beforeEachtest() {
+
 		driver = new ChromeDriver();
 		driver.manage().deleteAllCookies();
 		driver.manage().window().maximize();

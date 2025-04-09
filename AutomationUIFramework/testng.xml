@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Suite">
+<suite name="Suite" >
 <listeners>
 <listener class-name="Utilities.Listeners"></listener>
 </listeners>
-  <test name="Test" parallel="classes"  thread-count="2">
+  <test name="PositiveScenarios" parallel="tests"  thread-count="2">
     <classes>
-      <class name="PracticeProblemsSelenium.PracticeSelenium">
+      <class name="PracticeProblemsSelenium.StandaloneTest">
+      <!--	<methods>
+      		<include name ="testDataProvider" />
+      	</methods>-->
+      	</class>
+    </classes>
+  </test> <!-- Test -->
+  <test name="NegativeScenarios" parallel="classes"  thread-count="2">
+    <classes>
+      <class name="PracticeProblemsSelenium.NegativeScenarios">
       <!--	<methods>
       		<include name ="testDataProvider" />
       	</methods>-->
