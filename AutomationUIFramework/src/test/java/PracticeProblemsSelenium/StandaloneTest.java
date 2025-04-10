@@ -26,7 +26,7 @@ public class StandaloneTest  extends BaseClass {
 		@Test(groups = {"Positive"})
 		public void positiveE2EOrderCreation() {
 
-			String Username="pritam.debnath@gmail.com";
+			String Username="pritam.debnath@gmail.com";//anshika@gmail.com  Iamking@000
 			String password = "Test@1234";
 			String product = "ADIDAS ORIGINAL";
 			// TODO Auto-generated method stub
