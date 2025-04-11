@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="PracticeProblemsSelenium.NegativeScenarios">
+      <class name="PracticeProblemsSelenium.StandaloneTest">
         <methods>
+          <include name="positiveE2EOrderCreation"/>
           <include name="intializedriver"/>
           <include name="teardown"/>
-          <include name="validateErrorMessageIncorrectUsernamePassword"/>
         </methods>
-      </class> <!-- PracticeProblemsSelenium.NegativeScenarios -->
+      </class> <!-- PracticeProblemsSelenium.StandaloneTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

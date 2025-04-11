@@ -3,6 +3,8 @@ package Utilities;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import org.openqa.selenium.JavascriptExecutor;
@@ -10,6 +12,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
@@ -26,6 +29,7 @@ public class BaseClass {
 	public Actions action;
 	public JavascriptExecutor js;
 	public SoftAssert softassert;
+	public ChromeOptions options;
 
 	public void init_before_method(Scenario scenario) {
 		this.scenario = scenario;
@@ -46,8 +50,16 @@ public class BaseClass {
 		FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "\\TestData\\GlobalData.properties");
 		props.load(fis);
 		String url = (String) props.get("url");
+		options = new ChromeOptions();
+		options.addArguments("--disable-extensions");
+        options.addArguments("test-type");
+		Map<String, Object> prefs = new HashMap<String, Object>();
+        prefs.put("credentials_enable_service", false);
+        prefs.put("profile.password_manager_enabled", false);
+        options.setExperimentalOption("prefs", prefs);
+
 		if (props.get("browser").equals("chrome")) {
-			driver = new ChromeDriver();
+			driver = new ChromeDriver(options);
 		}
 
 		wait = new WebDriverWait(driver, Duration.ofSeconds(5));

@@ -11,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import PageObjects.CartPage;
@@ -23,12 +24,12 @@ import Utilities.BaseClass;
 public class StandaloneTest  extends BaseClass {
 
 	
-		@Test(groups = {"Positive"})
-		public void positiveE2EOrderCreation() {
+		@Test(groups = {"Positive"},dataProvider = "getData")
+		public void positiveE2EOrderCreation(String Username, String password, String product) {
 
-			String Username="pritam.debnath@gmail.com";//anshika@gmail.com  Iamking@000
-			String password = "Test@1234";
-			String product = "ADIDAS ORIGINAL";
+			//String Username="pritam.debnath@gmail.com";//pritamkol1995@gmail.com  Test@12345
+			//String password = "Test@1234";
+			//String product = "ADIDAS ORIGINAL";
 			// TODO Auto-generated method stub
 
 			//driver.get(URL);
@@ -46,6 +47,13 @@ public class StandaloneTest  extends BaseClass {
 			ordConfPage.checkConfirmation(wait);
 
 		}
+		
+		@DataProvider
+		public Object[][] getData(){
+			Object[][] data = {{"pritam.debnath@gmail.com","Test@1234","ADIDAS ORIGINAL"},{"pritamkol1995@gmail.com","Test@12345","ZARA COAT 3"}};
+			return data;
+		}
+		
 
 		
 	
