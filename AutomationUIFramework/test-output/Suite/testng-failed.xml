@@ -8,7 +8,7 @@
     <classes>
       <class name="PracticeProblemsSelenium.StandaloneTest">
         <methods>
-          <include name="positiveE2EOrderCreation" invocation-numbers="1"/>
+          <include name="positiveE2EOrderCreation"/>
           <include name="intializedriver"/>
           <include name="teardown"/>
         </methods>

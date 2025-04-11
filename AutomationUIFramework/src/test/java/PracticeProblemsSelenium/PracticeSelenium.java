@@ -308,6 +308,8 @@ public class PracticeSelenium extends BaseClass {
 		// Explicit wait
 		wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		softassert = new SoftAssert();
+		
+		
 	}
 
 	@AfterMethod

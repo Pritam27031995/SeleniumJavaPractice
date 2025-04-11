@@ -22,6 +22,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -36,6 +38,7 @@ public class BaseClass {
 	public JavascriptExecutor js;
 	public SoftAssert softassert;
 	public ChromeOptions options;
+	public ExtentReports extent;
 
 	public void init_before_method(Scenario scenario) {
 		this.scenario = scenario;
@@ -72,7 +75,7 @@ public class BaseClass {
 		driver.manage().deleteAllCookies();
 		driver.manage().window().maximize();
 		driver.get(url);
-
+		createExtentReport();
 	}
 	
 	@AfterMethod(alwaysRun = true)
@@ -87,6 +90,14 @@ public class BaseClass {
 		ObjectMapper mapper = new ObjectMapper();
 		List<HashMap<String, String>> Data =mapper.readValue(jsonContent, new TypeReference<List<HashMap<String,String>>>(){});
 		return Data;
+	}
+	
+	public void createExtentReport() {
+		ExtentSparkReporter exsp = new ExtentSparkReporter((System.getProperty("user.dir")+"\\Reports\\index.html"));
+		exsp.config().setReportName("Web Automation Report");
+		exsp.config().setDocumentTitle("Test Automation Results");
+		extent = new ExtentReports();
+		extent.attachReporter(exsp);
 	}
 
 }
