@@ -1,12 +1,15 @@
 package Utilities;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -18,6 +21,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.cucumber.java.Scenario;
 
@@ -72,6 +78,15 @@ public class BaseClass {
 	@AfterMethod(alwaysRun = true)
 	public void teardown() {
 		driver.quit();
+	}
+	
+	public List<HashMap<String, String>> getDataUsingJsonAsMap() throws IOException {
+		FileUtils fis = new FileUtils();
+		String jsonContent = fis.readFileToString(new File(System.getProperty("user.dir")+"\\TestData\\OrderData.json"));
+		
+		ObjectMapper mapper = new ObjectMapper();
+		List<HashMap<String, String>> Data =mapper.readValue(jsonContent, new TypeReference<List<HashMap<String,String>>>(){});
+		return Data;
 	}
 
 }
