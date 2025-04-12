@@ -7,10 +7,11 @@ import org.testng.annotations.Test;
 
 import PageObjects.LoginPage;
 import Utilities.BaseClass;
+import Utilities.Retry;
 
 public class NegativeScenarios extends BaseClass{
 	
-	@Test
+	@Test(retryAnalyzer = Retry.class)
 	public void validateErrorMessageIncorrectUsernamePassword() {
 		
 		String Username="pritam.debnath@gmail.com";
@@ -24,7 +25,7 @@ public class NegativeScenarios extends BaseClass{
 		
 		loginPage.login(Username, password);
 		String Errormessage =loginPage.getErrorMessage(wait);
-		Assert.assertEquals(Errormessage, "Incorrect email or password.");
+		Assert.assertEquals(Errormessage, "Incorrecto email or password.");
 	}
 
 

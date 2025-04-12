@@ -33,7 +33,7 @@ public class StandaloneTest  extends BaseClass {
 		@Test(groups = {"Positive"},dataProvider = "getData")
 		public void positiveE2EOrderCreation(HashMap<String, String> data) {
 			
-			ExtentTest extenttest = extent.createTest("E2EOrderCreation");
+			
 
 			//String Username="pritam.debnath@gmail.com";//pritamkol1995@gmail.com  Test@12345
 			//String password = "Test@1234";
@@ -54,7 +54,7 @@ public class StandaloneTest  extends BaseClass {
 			chkout.provideCountryAndPlaceOrder(wait);
 			ordConfPage.checkConfirmation(wait);
 			
-			extent.flush();
+			//extent.flush();
 
 		}
 		

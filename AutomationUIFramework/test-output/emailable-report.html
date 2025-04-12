@@ -9,11 +9,38 @@
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
 <tr><th colspan="8">Suite</th></tr>
-<tr><td><a href="#t0">PositiveScenarios</a></td><td class="num">2</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">17,271</td><td></td><td></td></tr>
+<tr><td><a href="#t0">NegativeScenarios</a></td><td class="num">0</td><td class="num">0</td><td class="num attn">2</td><td class="num attn">1</td><td class="num">13,333</td><td></td><td></td></tr>
+<tr class="stripe"><td><a href="#t1">PositiveScenarios</a></td><td class="num">2</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">17,600</td><td></td><td></td></tr>
+<tr><th>Total</th><th class="num">2</th><th class="num">0</th><th class="num attn">2</th><th class="num attn">1</th><th class="num">30,933</th><th colspan="2"></th></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">PositiveScenarios &#8212; passed</th></tr><tr class="passedeven"><td rowspan="2">PracticeProblemsSelenium.StandaloneTest</td><td><a href="#m0">positiveE2EOrderCreation</a></td><td rowspan="2">1744401738184</td><td rowspan="2">5107</td></tr><tr class="passedeven"><td><a href="#m1">positiveE2EOrderCreation</a></td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">NegativeScenarios &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">PracticeProblemsSelenium.NegativeScenarios</td><td><a href="#m0">validateErrorMessageIncorrectUsernamePassword</a></td><td rowspan="1">1744452573271</td><td rowspan="1">1100</td></tr><tr><th colspan="4">NegativeScenarios &#8212; retried</th></tr><tr class="retriedeven"><td rowspan="2">PracticeProblemsSelenium.NegativeScenarios</td><td><a href="#m1">validateErrorMessageIncorrectUsernamePassword</a></td><td rowspan="2">1744452565731</td><td rowspan="2">1322</td></tr><tr class="retriedeven"><td><a href="#m2">validateErrorMessageIncorrectUsernamePassword</a></td></tr></tbody>
+<tbody id="t1"><tr><th colspan="4">PositiveScenarios &#8212; passed</th></tr><tr class="passedeven"><td rowspan="2">PracticeProblemsSelenium.StandaloneTest</td><td><a href="#m3">positiveE2EOrderCreation</a></td><td rowspan="2">1744452566103</td><td rowspan="2">5583</td></tr><tr class="passedeven"><td><a href="#m4">positiveE2EOrderCreation</a></td></tr></tbody>
 </table>
-<h2>PositiveScenarios</h2><h3 id="m0">PracticeProblemsSelenium.StandaloneTest#positiveE2EOrderCreation</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>{password=Test@12345, product=ZARA COAT 3, username=pritamkol1995@gmail.com}</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m1">PracticeProblemsSelenium.StandaloneTest#positiveE2EOrderCreation</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>{password=Test@1234, product=ADIDAS ORIGINAL, username=pritam.debnath@gmail.com}</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>NegativeScenarios</h2><h3 id="m0">PracticeProblemsSelenium.NegativeScenarios#validateErrorMessageIncorrectUsernamePassword</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: expected [Incorrecto email or password.] but found [Incorrect email or password.]
+	at PracticeProblemsSelenium.NegativeScenarios.validateErrorMessageIncorrectUsernamePassword(NegativeScenarios.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+... Removed 21 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">PracticeProblemsSelenium.NegativeScenarios#validateErrorMessageIncorrectUsernamePassword</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: expected [Incorrecto email or password.] but found [Incorrect email or password.]
+	at PracticeProblemsSelenium.NegativeScenarios.validateErrorMessageIncorrectUsernamePassword(NegativeScenarios.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+... Removed 21 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">PracticeProblemsSelenium.NegativeScenarios#validateErrorMessageIncorrectUsernamePassword</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: expected [Incorrecto email or password.] but found [Incorrect email or password.]
+	at PracticeProblemsSelenium.NegativeScenarios.validateErrorMessageIncorrectUsernamePassword(NegativeScenarios.java:28)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+... Removed 21 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>PositiveScenarios</h2><h3 id="m3">PracticeProblemsSelenium.StandaloneTest#positiveE2EOrderCreation</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>{password=Test@1234, product=ADIDAS ORIGINAL, username=pritam.debnath@gmail.com}</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m4">PracticeProblemsSelenium.StandaloneTest#positiveE2EOrderCreation</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>{password=Test@12345, product=ZARA COAT 3, username=pritamkol1995@gmail.com}</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>

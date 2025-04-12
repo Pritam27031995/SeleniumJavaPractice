@@ -23,6 +23,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
 
 import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,14 +40,23 @@ public class BaseClass {
 	public SoftAssert softassert;
 	public ChromeOptions options;
 	public ExtentReports extent;
+	
 
 	public void init_before_method(Scenario scenario) {
 		this.scenario = scenario;
 	}
 
-	public void CaptureScreenshot() {
+	public void CaptureScreenshotCucumber() {
 		byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 		scenario.attach(screenshot, "image/png", "screenshot");
+	}
+	
+	public String CaptureScreenshot(WebDriver driver, String TestCaseName) throws IOException
+	{
+		String FilePath = System.getProperty("user.dir")+"//Screenshots//"+TestCaseName+".png";
+		File fs = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		FileUtils.copyFile(fs, new File(FilePath));
+		return FilePath;
 	}
 
 	public void reportLog(String string) {
@@ -75,7 +85,7 @@ public class BaseClass {
 		driver.manage().deleteAllCookies();
 		driver.manage().window().maximize();
 		driver.get(url);
-		createExtentReport();
+		
 	}
 	
 	@AfterMethod(alwaysRun = true)
@@ -92,12 +102,13 @@ public class BaseClass {
 		return Data;
 	}
 	
-	public void createExtentReport() {
+	public ExtentReports createExtentReport() {
 		ExtentSparkReporter exsp = new ExtentSparkReporter((System.getProperty("user.dir")+"\\Reports\\index.html"));
 		exsp.config().setReportName("Web Automation Report");
 		exsp.config().setDocumentTitle("Test Automation Results");
 		extent = new ExtentReports();
 		extent.attachReporter(exsp);
+		return extent;
 	}
 
 }
