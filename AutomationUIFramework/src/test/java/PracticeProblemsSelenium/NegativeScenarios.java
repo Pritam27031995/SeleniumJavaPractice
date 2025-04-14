@@ -11,7 +11,7 @@ import Utilities.Retry;
 
 public class NegativeScenarios extends BaseClass{
 	
-	@Test(retryAnalyzer = Retry.class)
+	@Test(retryAnalyzer = Retry.class,invocationCount = 2)
 	public void validateErrorMessageIncorrectUsernamePassword() {
 		
 		String Username="pritam.debnath@gmail.com";
@@ -25,7 +25,7 @@ public class NegativeScenarios extends BaseClass{
 		
 		loginPage.login(Username, password);
 		String Errormessage =loginPage.getErrorMessage(wait);
-		Assert.assertEquals(Errormessage, "Incorrecto email or password.");
+		Assert.assertEquals(Errormessage, "Incorrect email or password.");
 	}
 
 

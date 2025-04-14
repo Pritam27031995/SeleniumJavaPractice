@@ -1,5 +1,6 @@
 package Utilities;
 
+import java.awt.Dimension;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -72,6 +73,7 @@ public class BaseClass {
 		options = new ChromeOptions();
 		options.addArguments("--disable-extensions");
         options.addArguments("test-type");
+        //options.addArguments("headless"); // To run the browser in headless mode
 		Map<String, Object> prefs = new HashMap<String, Object>();
         prefs.put("credentials_enable_service", false);
         prefs.put("profile.password_manager_enabled", false);
@@ -84,6 +86,7 @@ public class BaseClass {
 		wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		driver.manage().deleteAllCookies();
 		driver.manage().window().maximize();
+		//driver.manage().window().setSize(new org.openqa.selenium.Dimension(1440,900)); //To set the browser to fullscreen in headless mode
 		driver.get(url);
 		
 	}
